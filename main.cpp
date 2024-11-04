@@ -19,6 +19,7 @@ int main() {
     //       <friendship, species, catchphrase>
     map<string, tuple<int, string, string>> villagers;
 
+    // Menu Loop
     bool quit = false;
     while (!quit){
         int choice = menu();
@@ -89,20 +90,24 @@ void add_vil(map<string, tuple<int, string, string>> &villagers){
 }
 
 void delete_vil(map<string, tuple<int, string, string>> &villagers){
+    // Input
     cout << "Name: ";
     string name; getline(cin, name);
 
+    // Operation
     villagers.erase(name);
     print(villagers);
 }
 
 void increase(map<string, tuple<int, string, string>> &villagers){
+    // Input
     cout << "Name: ";
     string name; getline(cin, name);
 
+    // Operation
     auto it = villagers.find(name);
     if (it == villagers.end()){
-        cout << "Villager not found.\n";
+        cout << "Villager not found.\n\n";
         return;
     }
     get<0>(villagers[name]) += 1;
@@ -114,12 +119,14 @@ void increase(map<string, tuple<int, string, string>> &villagers){
 }
 
 void decrease(map<string, tuple<int, string, string>> &villagers){
+    // Input
     cout << "Name: ";
     string name; getline(cin, name);
 
+    // Operation
     auto it = villagers.find(name);
     if (it == villagers.end()){
-        cout << "Villager not found.\n";
+        cout << "Villager not found.\n\n";
         return;
     }
     get<0>(villagers[name]) -= 1;
@@ -131,12 +138,14 @@ void decrease(map<string, tuple<int, string, string>> &villagers){
 }
 
 void search(map<string, tuple<int, string, string>> &villagers){
+    // Input
     cout << "Name: ";
     string name; getline(cin, name);
 
+    // Operation
     auto it = villagers.find(name);
     if (it == villagers.end()){
-        cout << "Villager not found.\n";
+        cout << "Villager not found.\n\n";
         return;
     }
 
@@ -148,7 +157,7 @@ void search(map<string, tuple<int, string, string>> &villagers){
 
 void print(map<string, tuple<int, string, string>> &villagers){
     cout << "Villagers:\n";
-    for (auto pair : villagers){
+    for (auto pair : villagers){ // loop through villagers
         cout << pair.first << " [";
         cout << get<0>(pair.second) << ", ";
         cout << get<1>(pair.second) << ", ";
