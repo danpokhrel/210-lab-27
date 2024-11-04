@@ -71,6 +71,19 @@ int menu(){
 void add_vil(map<string, tuple<int, string, string>> &villagers){
     cout << "Name: ";
     string name; getline(cin, name);
+    cout << "Friendship Level (0-10): ";
+    int level; cin >> level; cin.ignore();
+    cout << "Species: ";
+    string species; getline(cin, species);
+    cout << "Catchphrase: ";
+    string catchphrase; getline(cin, catchphrase);
+    cout << endl;
+
+    if (level < 0) level = 0;
+    if (level > 10) level = 10;
+
+    villagers[name] = {level, species, catchphrase};
+    print(villagers);
 }
 
 void delete_vil(map<string, tuple<int, string, string>> &villagers){
@@ -86,4 +99,7 @@ void search(map<string, tuple<int, string, string>> &villagers){
 }
 
 void print(map<string, tuple<int, string, string>> &villagers){
+    for (auto pair : villagers){
+        cout << "Villager Name: " << pair.first << endl;
+    }
 }
