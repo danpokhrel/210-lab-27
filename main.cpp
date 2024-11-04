@@ -58,7 +58,7 @@ int menu(){
     cout << "-------------------------\n";
     cout << "Enter your choice: ";
     
-    int choice; cin >> choice;
+    int choice; cin >> choice; cin.ignore();
     if (choice < 1 || choice > 6){ // Input Validation
         cout << "\n<Invalid Input>\n";
         return menu();
@@ -69,6 +69,7 @@ int menu(){
 }
 
 void add_vil(map<string, tuple<int, string, string>> &villagers){
+    // Input
     cout << "Name: ";
     string name; getline(cin, name);
     cout << "Friendship Level (0-10): ";
@@ -79,27 +80,44 @@ void add_vil(map<string, tuple<int, string, string>> &villagers){
     string catchphrase; getline(cin, catchphrase);
     cout << endl;
 
+    // Map level to 0-10
     if (level < 0) level = 0;
     if (level > 10) level = 10;
-
-    villagers[name] = {level, species, catchphrase};
+    
+    villagers[name] = {level, species, catchphrase}; // Add to map
     print(villagers);
 }
 
 void delete_vil(map<string, tuple<int, string, string>> &villagers){
+    cout << "Name: ";
+    string name; getline(cin, name);
+
+    villagers.erase(name);
+    print(villagers);
 }
 
 void increase(map<string, tuple<int, string, string>> &villagers){
+    cout << "Name: ";
+    string name; getline(cin, name);
+
+
 }
 
 void decrease(map<string, tuple<int, string, string>> &villagers){
+    cout << "Name: ";
+    string name; getline(cin, name);
 }
 
 void search(map<string, tuple<int, string, string>> &villagers){
 }
 
 void print(map<string, tuple<int, string, string>> &villagers){
+    cout << "Villagers:\n";
     for (auto pair : villagers){
-        cout << "Villager Name: " << pair.first << endl;
+        cout << pair.first << "[";
+        cout << get<0>(pair.second) << ", ";
+        cout << get<1>(pair.second) << ", ";
+        cout << get<2>(pair.second) << "]\n";
     }
+    cout << endl;
 }
