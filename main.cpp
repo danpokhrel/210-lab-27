@@ -100,21 +100,56 @@ void increase(map<string, tuple<int, string, string>> &villagers){
     cout << "Name: ";
     string name; getline(cin, name);
 
+    auto it = villagers.find(name);
+    if (it == villagers.end()){
+        cout << "Villager not found.\n";
+        return;
+    }
+    get<0>(villagers[name]) += 1;
+    if (get<0>(villagers[name]) > 10) get<0>(villagers[name]) = 10;
+    if (get<0>(villagers[name]) < 0) get<0>(villagers[name]) = 0;
 
+    cout << endl;
+    print(villagers);
 }
 
 void decrease(map<string, tuple<int, string, string>> &villagers){
     cout << "Name: ";
     string name; getline(cin, name);
+
+    auto it = villagers.find(name);
+    if (it == villagers.end()){
+        cout << "Villager not found.\n";
+        return;
+    }
+    get<0>(villagers[name]) -= 1;
+    if (get<0>(villagers[name]) > 10) get<0>(villagers[name]) = 10;
+    if (get<0>(villagers[name]) < 0) get<0>(villagers[name]) = 0;
+
+    cout << endl;
+    print(villagers);
 }
 
 void search(map<string, tuple<int, string, string>> &villagers){
+    cout << "Name: ";
+    string name; getline(cin, name);
+
+    auto it = villagers.find(name);
+    if (it == villagers.end()){
+        cout << "Villager not found.\n";
+        return;
+    }
+
+    cout << name << " ["
+        << get<0>(villagers[name])<< ", "
+        << get<1>(villagers[name]) << ", "
+        << get<2>(villagers[name]) << "]\n\n";
 }
 
 void print(map<string, tuple<int, string, string>> &villagers){
     cout << "Villagers:\n";
     for (auto pair : villagers){
-        cout << pair.first << "[";
+        cout << pair.first << " [";
         cout << get<0>(pair.second) << ", ";
         cout << get<1>(pair.second) << ", ";
         cout << get<2>(pair.second) << "]\n";
